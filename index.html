@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BKIS - English Functional Guidance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="app">
+  <header id="main-header" class="hidden">
+    <div class="logo">BKIS</div>
+    <nav>
+      <ul>
+        <li><a href="#" data-target="home-view" class="nav-link active" data-i18n="nav_home">Home</a></li>
+        <li><a href="#" data-target="community-view" class="nav-link" data-i18n="nav_community">Community</a></li>
+        <li><a href="#" data-target="school-info-view" class="nav-link" data-i18n="nav_info">School Info</a></li>
+        <li><a href="#" data-target="matching-view" class="nav-link" data-i18n="nav_match">Match</a></li>
+        <li><a href="#" data-target="guides-view" class="nav-link" data-i18n="nav_guide">Guide</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 1. Login View -->
+    <section id="login-view" class="view">
+      <div style="text-align: center; margin-bottom: 40px; margin-top: 40px;">
+        <h1 style="color: var(--primary-color); font-size: 2.5rem; font-weight: 800;">Welcome to BKIS</h1>
+        <p>Bridging Koreans and International Students</p>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label data-i18n="login_id_label">School Email or ID</label>
+          <input type="text" id="login-id" placeholder="Enter ID" required>
+        </div>
+        <div class="form-group">
+          <label data-i18n="login_nickname_label">Nickname</label>
+          <input type="text" id="login-nickname" placeholder="Your display name" required>
+        </div>
+        <div class="form-group">
+          <label data-i18n="login_type_label">Student Type</label>
+          <select id="login-type">
+            <option value="korean" data-i18n="type_korean">Korean Student</option>
+            <option value="international" data-i18n="type_intl">International Student</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label data-i18n="login_lang_label">Primary Language (Changes App Language)</label>
+          <select id="login-lang">
+            <option value="Korean">Korean (한국어)</option>
+            <option value="English">English</option>
+          </select>
+        </div>
+        <button type="submit" class="btn" data-i18n="login_btn">Join Community</button>
+      </form>
+    </section>
+
+    <!-- 2. Home View -->
+    <section id="home-view" class="view hidden">
+      <h2><span data-i18n="home_welcome">Welcome,</span> <span id="welcome-name" style="color:var(--primary-color)">Student</span>! 👋</h2>
+      <p data-i18n="home_subtitle">What would you like to do today?</p>
+
+      <div class="card-grid">
+        <a href="#" class="dashboard-card" onclick="document.querySelector('[data-target=community-view]').click()">
+          <i>💬</i>
+          <h3 data-i18n="card_community_title">Community</h3>
+          <p style="font-size: 0.8rem; margin-top: 8px;" data-i18n="card_community_desc">Q&A and Chat</p>
+        </a>
+        <a href="#" class="dashboard-card" onclick="document.querySelector('[data-target=school-info-view]').click()">
+          <i>🏫</i>
+          <h3 data-i18n="card_info_title">School Info</h3>
+          <p style="font-size: 0.8rem; margin-top: 8px;" data-i18n="card_info_desc">Registration & Admin</p>
+        </a>
+        <a href="#" class="dashboard-card" onclick="document.querySelector('[data-target=matching-view]').click()">
+          <i>🤝</i>
+          <h3 data-i18n="card_match_title">1:1 Match</h3>
+          <p style="font-size: 0.8rem; margin-top: 8px;" data-i18n="card_match_desc">Language Exchange</p>
+        </a>
+        <a href="#" class="dashboard-card" onclick="document.querySelector('[data-target=guides-view]').click()">
+          <i>📖</i>
+          <h3 data-i18n="card_guide_title">English Guide</h3>
+          <p style="font-size: 0.8rem; margin-top: 8px;" data-i18n="card_guide_desc">Useful Phrases</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- 3. Community View -->
+    <section id="community-view" class="view hidden">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 data-i18n="community_title">Community</h2>
+        <button class="btn btn-small btn-write-trigger" data-board="community" data-i18n="btn_write">Write Post</button>
+      </div>
+      <div id="post-list"></div>
+    </section>
+
+    <!-- 3.5 School Info View -->
+    <section id="school-info-view" class="view hidden">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2 data-i18n="info_title">School Info</h2>
+        <button class="btn btn-small btn-write-trigger" data-board="school-info" data-i18n="btn_write">Write Post</button>
+      </div>
+      <div class="tabs">
+        <button class="tab active info-tab" data-category="All" data-i18n="tab_all">All</button>
+        <button class="tab info-tab" data-category="Registration" data-i18n="tab_reg">Registration</button>
+        <button class="tab info-tab" data-category="Admin" data-i18n="tab_admin">Admin</button>
+      </div>
+      <div id="info-list"></div>
+    </section>
+
+    <!-- 4. Matching View -->
+    <section id="matching-view" class="view hidden">
+      <div style="text-align: center;">
+        <h2 data-i18n="match_title">1:1 Language Exchange</h2>
+        <p data-i18n="match_desc">Find a partner to practice languages and share campus tips.</p>
+        
+        <div id="match-ui-default">
+          <button class="btn" id="btn-start-match" style="margin-top: 40px;" data-i18n="match_btn_start">Find a Partner</button>
+        </div>
+
+        <div id="match-ui-searching" class="hidden">
+          <div class="matching-radar">
+            <div class="circle"></div>
+          </div>
+          <p data-i18n="match_searching">Looking for a match...</p>
+        </div>
+
+        <div id="match-ui-result" class="hidden" style="margin-top: 30px;">
+          <div class="post-card" style="border: 2px solid var(--primary-color);">
+            <h3 style="margin-bottom: 10px;" data-i18n="match_found">Match Found! 🎉</h3>
+            <div id="matched-user-info" style="font-size: 1.1rem; margin-bottom: 20px;"></div>
+            <button class="btn" data-i18n="match_btn_chat">Start Chat</button>
+            <button class="btn btn-secondary" id="btn-rematch" style="margin-top: 10px;" data-i18n="match_btn_rematch">Find Someone Else</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Guides View -->
+    <section id="guides-view" class="view hidden">
+      <h2 data-i18n="guide_title">Guides & Rules</h2>
+      
+      <div class="tabs" style="margin-bottom: 20px;">
+        <button class="tab active" id="tab-phrases" data-i18n="guide_tab_phrase">English Phrases</button>
+        <button class="tab" id="tab-rules" data-i18n="guide_tab_rule">Privacy Rules</button>
+      </div>
+
+      <div id="guide-content"></div>
+    </section>
+  </main>
+
+  <!-- Modals -->
+  <div id="modal-write-post" class="modal-overlay hidden">
+    <div class="modal-content">
+      <h3 style="margin-bottom: 16px;" id="modal-title" data-i18n="modal_title">Write a Post</h3>
+      
+      <div class="form-group" id="modal-category-group">
+        <label data-i18n="modal_category">Category</label>
+        <select id="post-category">
+          <option value="Registration" data-i18n="tab_reg">Registration</option>
+          <option value="Admin" data-i18n="tab_admin">Admin</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label data-i18n="modal_post_title">Title</label>
+        <input type="text" id="post-title" placeholder="Enter title">
+      </div>
+      <div class="form-group">
+        <label data-i18n="modal_content">Content</label>
+        <textarea id="post-content" rows="4" placeholder="Write your message here..."></textarea>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button class="btn" id="btn-submit-post" data-i18n="modal_btn_post">Post</button>
+        <button class="btn btn-secondary" id="btn-cancel-post" data-i18n="modal_btn_cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
